@@ -46,6 +46,68 @@ function Stat({ value, label }) {
   );
 }
 
+// ── Payment section ──────────────────────────────────────────────────────────
+function PaymentSection() {
+  const [copied, setCopied] = useState(false);
+  const address = 'TNT74mrXao3JBxnc5vjXiV6LNpqLuh9L2R';
+
+  function handleCopy() {
+    navigator.clipboard.writeText(address).catch(() => {});
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
+  return (
+    <section className="py-12 px-6 bg-[#0a0a1a] border-t border-gray-800">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold text-white mb-2">Payment simple &amp; secure</h2>
+        <p className="text-gray-400 mb-8">
+          We accept USDT (TRC20). Please send the amount to the address below and contact us on
+          Telegram with your payment screenshot.
+        </p>
+
+        <div className="bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] p-8 rounded-2xl border border-gray-700 shadow-2xl">
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold text-white mb-4">Pay via USDT (TRC20)</h3>
+
+            {/* Copyable wallet address */}
+            <div
+              className={`bg-emerald-900/20 border p-4 rounded-lg cursor-pointer transition-all flex justify-between items-center gap-4 ${
+                copied
+                  ? 'border-emerald-400/70 bg-emerald-900/30'
+                  : 'border-emerald-500/30 hover:border-emerald-500/60'
+              }`}
+              onClick={handleCopy}
+              role="button"
+              aria-label="Copy wallet address"
+            >
+              <code className="text-emerald-400 font-mono text-sm break-all leading-relaxed">
+                {address}
+              </code>
+              <span
+                className={`text-xs ml-4 font-bold uppercase tracking-wider shrink-0 transition-colors ${
+                  copied ? 'text-emerald-300' : 'text-emerald-500'
+                }`}
+              >
+                {copied ? '✓ Copied' : 'Copy'}
+              </span>
+            </div>
+          </div>
+
+          <a
+            href="https://t.me/roy123456777"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block w-full text-center bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg"
+          >
+            Contact TG support
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── Skeleton ──────────────────────────────────────────────────────────────────
 function CardSkeleton() {
   return (
@@ -261,6 +323,9 @@ export default function StorePage() {
             ))}
           </div>
         </section>
+
+        {/* ── Payment section ──────────────────────────────────────────────── */}
+        <PaymentSection />
 
         {/* ── Footer ───────────────────────────────────────────────────────── */}
         <footer className="text-center text-xs text-gray-700 py-8 border-t border-white/[0.04]">
