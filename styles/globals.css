@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ── Base ─────────────────────────────────────────────────────────────────────── */
+@layer base {
+  html { @apply scroll-smooth; }
+  body {
+    @apply text-gray-100 font-sans antialiased;
+    background-color: #080c1a;
+  }
+}
+
+/* ── Page background: deep-space mesh with colored orbs ──────────────────────── */
+.page-bg {
+  background-color: #080c1a;
+  background-image:
+    radial-gradient(ellipse at 8%  30%, rgba(99,  102, 241, 0.18) 0%, transparent 52%),
+    radial-gradient(ellipse at 92% 12%, rgba(139,  92, 246, 0.14) 0%, transparent 48%),
+    radial-gradient(ellipse at 55% 88%, rgba(56,  189, 248, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 78%, rgba(236,  72, 153, 0.07) 0%, transparent 45%);
+}
+
+/* ── Glassmorphism card ──────────────────────────────────────────────────────── */
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* ── Glass panel (used in checkout, etc.) ────────────────────────────────────── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Gradient CTA button ─────────────────────────────────────────────────────── */
+.btn-gradient {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #7c3aed 100%);
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.45);
+  transition: all 0.2s ease;
+}
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #818cf8 0%, #6366f1 50%, #a78bfa 100%);
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.6);
+  transform: translateY(-1px);
+}
+.btn-gradient:active {
+  transform: translateY(0px);
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.35);
+}
+
+/* ── Legacy component aliases (used by checkout / email / USDT pages) ─────────── */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl
+           bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700
+           text-white font-semibold transition-colors duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl
+           border border-white/15 hover:border-indigo-400
+           text-gray-300 hover:text-white font-semibold transition-colors duration-150;
+  }
+  .card {
+    @apply glass-panel rounded-2xl overflow-hidden;
+  }
+  .input {
+    @apply w-full px-4 py-3 rounded-xl
+           bg-white/5 border border-white/10
+           text-gray-100 placeholder-gray-500
+           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent
+           transition-all duration-150;
+  }
+}
+
+/* ── Telegram pulse ring ─────────────────────────────────────────────────────── */
+@keyframes tg-ping {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  70%  { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.tg-ping::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #0088cc;
+  animation: tg-ping 2s ease-out infinite;
+  z-index: -1;
+}
