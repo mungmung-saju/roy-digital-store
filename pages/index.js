@@ -58,7 +58,7 @@ function PaymentSection() {
   }
 
   return (
-    <section className="py-12 px-6 bg-[#0a0a1a] border-t border-gray-800">
+    <section id="payment-section" className="py-12 px-6 bg-[#0a0a1a] border-t border-gray-800">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-white mb-2">Payment simple &amp; secure</h2>
         <p className="text-gray-400 mb-8">

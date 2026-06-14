@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Link from 'next/link';
 import BrandLogo from './BrandLogo';
 
 // ── Brand accent colours (top border gradient) ────────────────────────────────
@@ -171,15 +170,18 @@ export default function ProductCard({ product }) {
             Out of Stock
           </button>
         ) : (
-          <Link
-            href={`/checkout/${id}?qty=${qty}`}
+          <button
+            onClick={() => {
+              const el = document.getElementById('payment-section');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
             className="btn-gradient w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold text-white"
           >
             Buy Now
             <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </Link>
+          </button>
         )}
       </div>
     </div>
